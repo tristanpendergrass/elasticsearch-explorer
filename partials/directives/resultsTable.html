@@ -1,0 +1,18 @@
+<div class="results-table">
+  <table>
+	<tr>
+	  <th>{{foo}}_scalaTimestamp</th>
+	  <th>_action</th>
+	  <th>_originatorIdentifier</th>
+	  <th>onEnterTimestamp</th>
+	  <th>onExitTimestamp</h1>
+	</tr>
+	<tr ng-repeat="hit in displayData">
+	  <td>{{hit._scalaTimestamp}}</td>
+	  <td>{{hit._action}}</td>
+	  <td>{{hit._originatorIdentifier}}</td>
+	  <td>{{hit.onEnterTimestamp}}</td>
+	  <td>{{hit.onExitTimestamp}}</td>
+	</tr>
+  </table>
+</div>

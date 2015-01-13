@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="SESE">
+  <head>
+    <meta charset="UTF-8">
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="main.css">
+
+	<script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular.min.js'></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.min.js"></script>
+
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/Elasticsearch.service.js"></script>
+	<script type="text/javascript" src="js/resultsTable.directive.js"></script>
+  </head>
+  <body>
+	<h1>Scala Elasticsearch Explorer</h1>
+	<h4>
+	  <strong>device token</strong>:
+	  <input type="text" class="device-token-input" ng-model="selectedDeviceToken">
+	</h4>
+	<label>
+	  <input type="radio" ng-model="autoRefresh" value="true">
+	  Auto Refresh
+	</label>
+	<label>
+	  <input type="radio" ng-model="autoRefresh" value="false">
+	  Manual Refresh
+	</label>
+	<button type="button" ng-click="manualRefresh()" ng-if="autoRefresh === 'false'">Refresh</button>
+
+	<results-table data="data" ng-if="data"></results-table>
+	<div ng-if="!data">No data available</div>
+	</div>
+  </body>
+</html>

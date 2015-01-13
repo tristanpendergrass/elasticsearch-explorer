@@ -1,0 +1,21 @@
+body {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: normal;
+}
+h1 {
+  font-weight: normal;
+}
+.results-table {
+  margin-top: 10px;
+  font-family: 'Inconsolata', monospace;
+}
+.device-token-input {
+  padding: 3px;
+  font-family: 'Inconsolata', monospace;
+  font-size: 16px;
+  width: 550px;
+}
