@@ -1,4 +1,4 @@
-angular.module('SESE')
+angular.module('EE')
 .service('Elasticsearch', ['$http',
   function Elasticsearch ($http) {
 	var that = this;

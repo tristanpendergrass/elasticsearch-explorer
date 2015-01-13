@@ -1,4 +1,4 @@
-angular.module('SESE')
+angular.module('EE')
 .directive('resultsTable', [function () {
   return {
 	restrict: 'E',

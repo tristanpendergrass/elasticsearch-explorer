@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var app = angular.module('SESE', ['ui.router']);
+  var app = angular.module('EE', ['ui.router']);
 
   app.run(['$rootScope', '$interval', 'Elasticsearch',
 	function ($rootScope, $interval, Elasticsearch) {
