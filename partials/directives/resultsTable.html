@@ -8,7 +8,7 @@
 	  <th>onEnterTimestamp</th>
 	  <th>onExitTimestamp</h1>
 	</tr>
-	<tr ng-repeat="hit in displayData">
+	<tr ng-repeat="hit in displayData" ng-click="rowClicked(hit)">
 	  <td>{{hit._scalaTimestamp}}</td>
 	  <td>{{hit._action}}</td>
 	  <td>{{hit._originatorIdentifier}}</td>

@@ -8,6 +8,7 @@ angular.module('EE')
 	},
 	link: function (scope) {
 	  scope.$watch('data', onDataChange, true);
+	  scope.rowClicked = rowClicked;
 
 	  function onDataChange () {
 		if (!scope.data) return;
@@ -33,6 +34,11 @@ angular.module('EE')
 	  function transformDate (date) {
 		var momentDate = moment(date);
 		return momentDate.format('YYYY-MM-DD HH:mm:ss');
+	  }
+
+	  function rowClicked (hit) {
+		  console.info(hit);
+		  alertify.success('Logged row to console.');
 	  }
 	}
   };
