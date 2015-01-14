@@ -16,7 +16,7 @@
 		});
 	  };
 
-	  $rootScope.selectedDeviceToken = '5ceb652cb10040b585f9d423044e6aa182ad0aef8363af90f7147236049db2b1';
+	  $rootScope.selectedDeviceToken = '';
 	  $rootScope.autoRefresh = 'true';
 
 	  //$rootScope.$watch('data', onDataChange, function (newData) {
