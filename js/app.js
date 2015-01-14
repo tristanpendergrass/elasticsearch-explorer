@@ -5,7 +5,7 @@
 
   app.run(['$rootScope', '$interval', 'Elasticsearch',
 	function ($rootScope, $interval, Elasticsearch) {
-	  $rootScope.pollingInterval = 500;
+	  $rootScope.pollingInterval = 1000;
 	
 	  $rootScope.runQuery = function runQuery () {
 		Elasticsearch.query($rootScope.selectedDeviceToken)
