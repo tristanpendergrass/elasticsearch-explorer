@@ -5,6 +5,8 @@
 
   app.run(['$rootScope', '$interval', 'Elasticsearch',
 	function ($rootScope, $interval, Elasticsearch) {
+	  $rootScope.pollingInterval = 500;
+	
 	  $rootScope.runQuery = function runQuery () {
 		Elasticsearch.query($rootScope.selectedDeviceToken)
 		.then(function (res) {
@@ -15,7 +17,7 @@
 	  };
 
 	  $rootScope.selectedDeviceToken = '5ceb652cb10040b585f9d423044e6aa182ad0aef8363af90f7147236049db2b1';
-	  $rootScope.autoRefresh = 'false';
+	  $rootScope.autoRefresh = 'true';
 
 	  //$rootScope.$watch('data', onDataChange, function (newData) {
 		//$rootScope.$broadcast('table-data-changed', $rootScope.data);
@@ -24,7 +26,7 @@
 	  $rootScope.$watch('autoRefresh', function () {
 		if ($rootScope.autoRefresh === 'true') {
 		  $rootScope.runQuery();
-		  $rootScope.autoRefreshInterval = $interval($rootScope.runQuery, 1000);
+		  $rootScope.autoRefreshInterval = $interval($rootScope.runQuery, $rootScope.pollingInterval);
 		} else {
 		  $interval.cancel($rootScope.autoRefreshInterval);
 		}

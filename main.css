@@ -9,13 +9,38 @@ body {
 h1 {
   font-weight: normal;
 }
+td {
+  margin:0;
+  border-spacing:0;
+}
 .results-table {
   margin-top: 10px;
   font-family: 'Inconsolata', monospace;
+  -webkit-column-gap: 40px;
+}
+.results-table td {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.results-table tr:nth-child(even) {
+  background-color: #f3f3f3;
+}
+.results-table td:first-child {
+  padding-left: 0;
 }
 .device-token-input {
   padding: 3px;
   font-family: 'Inconsolata', monospace;
   font-size: 16px;
   width: 550px;
+}
+.polling-for-data {
+	width: 200px;
+	float: right;
+}
+.polling-for-data img {
+	width: 16px;
+}
+.auto-manual-options {
+	display: inline-block;
 }
