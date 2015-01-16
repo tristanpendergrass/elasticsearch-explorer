@@ -23,10 +23,15 @@
   </head>
   <body>
 	<h1>Scala Elasticsearch Explorer</h1>
-	<h4>
+	<h4 class="filter-input-group">
 	  <strong>device token</strong>:
 	  <input type="text" class="device-token-input" ng-model="selectedDeviceToken">
 	</h4>
+	<h4 class="filter-input-group">
+	  <strong>application uuid</strong>:
+	  <input type="text" class="device-token-input" ng-model="selectedApplicationUuid">
+	</h4>
+	<div class="clear"></div>
 	<div class="auto-manual-options">
 		<label>
 		  <input type="radio" ng-model="autoRefresh" value="true">

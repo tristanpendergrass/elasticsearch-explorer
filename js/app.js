@@ -11,7 +11,7 @@
 	  $rootScope.runQuery = function runQuery () {
 		if ($rootScope.currentRequest) return; // don't make another request if one already is pending
 
-		$rootScope.currentRequest = Elasticsearch.query($rootScope.selectedDeviceToken)
+		$rootScope.currentRequest = Elasticsearch.query($rootScope.selectedDeviceToken, $rootScope.selectedApplicationUuid)
 		.then(function (res) {
 		  $rootScope.data = res.data.hits.hits.map(function (hit) {
 			return hit._source;

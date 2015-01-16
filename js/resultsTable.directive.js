@@ -15,8 +15,11 @@ angular.module('EE')
 
 		scope.displayData = scope.data.map(function (hit) {
 		  hit = angular.copy(hit);
-		  if (hit._originatorIdentifier.length > 20) {
-			hit._originatorIdentifier = hit._originatorIdentifier.substring(0, 20) + '...';
+		  if (hit._originatorIdentifier.length > 15) {
+			hit._originatorIdentifier = hit._originatorIdentifier.substring(0, 15) + '...';
+		  }
+		  if (hit.applicationUuid.length > 15) {
+			hit.applicationUuid = hit.applicationUuid.substring(0, 15) + '...';
 		  }
 		  if (hit._scalaTimestamp) {
 			hit._scalaTimestamp = transformDate(hit._scalaTimestamp);
