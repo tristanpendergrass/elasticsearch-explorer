@@ -3,8 +3,8 @@
 (function () {
   var app = angular.module('EE', ['ui.router']);
 
-  app.run(['$rootScope', '$interval', 'Elasticsearch',
-	function ($rootScope, $interval, Elasticsearch) {
+  app.run(['$rootScope', '$interval', '$timeout', 'Elasticsearch',
+	function ($rootScope, $interval, $timeout, Elasticsearch) {
 	  $rootScope.pollingInterval = 1000;
 	  $rootScope.currentRequest = null;
 
@@ -22,7 +22,12 @@
 		}, function (err) {
 		  console.error('Error with elasticsearch query', err);
 		  alertify.error('Elasticsearch query failed');
-		  $rootScope.autoRefresh = 'false';
+		  if ($rootScope.autoRefresh === 'true') {
+			  $rootScope.autoRefresh = 'false';
+			  $timeout(function () {
+				  alertify.error('Halting auto refresh');
+			  }, 750);
+		  }
 		})
 		.finally(function () {
 		  $rootScope.currentRequest = null;

@@ -60,3 +60,12 @@ td {
 #database-filter {
 	margin-left: 25px;
 }
+.alertify {
+	font-size: 14px;
+	width: 80%;
+	left: 10%;
+	margin-left:0;
+}
+.alertify-dialog {
+	padding: 15px;
+}
