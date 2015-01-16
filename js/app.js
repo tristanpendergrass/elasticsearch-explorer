@@ -13,15 +13,15 @@
 		  $rootScope.data = res.data.hits.hits.map(function (hit) {
 			return hit._source;
 		  });
+		}, function (err) {
+		  console.error('Error with elasticsearch query', err);
+		  alertify.error('Elasticsearch query failed');
+		  $rootScope.autoRefresh = 'false';
 		});
 	  };
 
 	  $rootScope.selectedDeviceToken = '';
 	  $rootScope.autoRefresh = 'true';
-
-	  //$rootScope.$watch('data', onDataChange, function (newData) {
-		//$rootScope.$broadcast('table-data-changed', $rootScope.data);
-	  //});
 
 	  $rootScope.$watch('autoRefresh', function () {
 		if ($rootScope.autoRefresh === 'true') {
@@ -35,12 +35,5 @@
 	  $rootScope.manualRefresh = function manualRefresh () {
 		$rootScope.runQuery();
 	  };
-
-	  $rootScope.foo = 'foo';
-	  $rootScope.foo = function () {
-		alert();
-		$rootScope.foo = $rootScope.foo + 1;
-	  }
 	}]);
-
 })();
