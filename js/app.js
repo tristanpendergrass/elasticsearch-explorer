@@ -7,10 +7,13 @@
 	function ($rootScope, $interval, Elasticsearch) {
 	  $rootScope.pollingInterval = 1000;
 	  $rootScope.currentRequest = null;
+
+	  $rootScope.selectedDatabaseUrl = 'http://api.scala.com:9200/';
 	
 	  $rootScope.runQuery = function runQuery () {
 		if ($rootScope.currentRequest) return; // don't make another request if one already is pending
 
+		Elasticsearch.baseUrl = $rootScope.selectedDatabaseUrl;
 		$rootScope.currentRequest = Elasticsearch.query($rootScope.selectedDeviceToken, $rootScope.selectedApplicationUuid)
 		.then(function (res) {
 		  $rootScope.data = res.data.hits.hits.map(function (hit) {

@@ -15,6 +15,9 @@
 	<script type="text/javascript" src="js/lib/angular-ui-router-0.2.11.min.js"></script>
 	<script type="text/javascript" src="js/lib/moment.min.js"></script>
 	<script type="text/javascript" src="js/lib/alertify.min.js"></script>
+	<script type="text/javascript" src="js/lib/alertify.min.js"></script>
+	<script type="text/javascript" src="js/lib/json2html.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.json2html.js"></script>
 
 	<!--our app-->
 	<script type="text/javascript" src="js/app.js"></script>
@@ -24,12 +27,17 @@
   <body>
 	<h1>Scala Elasticsearch Explorer</h1>
 	<h4 class="filter-input-group">
+	  <strong>database</strong>:
+	  <input id="database-filter" type="text" class="device-token-input" ng-model="selectedDatabaseUrl" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }">
+	</h4>
+	<div class="clear"></div>
+	<h4 class="filter-input-group">
 	  <strong>device token</strong>:
-	  <input type="text" class="device-token-input" ng-model="selectedDeviceToken">
+	  <input type="text" class="device-token-input" ng-model="selectedDeviceToken" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }">
 	</h4>
 	<h4 class="filter-input-group">
 	  <strong>application uuid</strong>:
-	  <input type="text" class="device-token-input" ng-model="selectedApplicationUuid">
+	  <input type="text" class="device-token-input" ng-model="selectedApplicationUuid" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }">
 	</h4>
 	<div class="clear"></div>
 	<div class="auto-manual-options">

@@ -42,6 +42,7 @@ angular.module('EE')
 	  function rowClicked (hit) {
 		  console.info(hit);
 		  alertify.success('Logged row to console.');
+		  //alertify.alert(JSON.stringify(hit));
 	  }
 	}
   };
