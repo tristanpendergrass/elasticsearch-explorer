@@ -62,10 +62,23 @@ td {
 }
 .alertify {
 	font-size: 14px;
-	width: 80%;
-	left: 10%;
+	width: 50%;
+	left: 25%;
 	margin-left:0;
 }
 .alertify-dialog {
 	padding: 15px;
+}
+.json-to-dom {
+	font-family: 'Inconsolata', monospace;
+}
+.json-to-dom p {
+	margin-top: 0;
+	margin-bottom: 2px;
+}
+.json-to-dom p:last-child {
+	margin-bottom: 0;
+}
+.json-to-dom-list-item {
+	margin-left: 30px;
 }
