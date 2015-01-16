@@ -6,9 +6,12 @@
   app.run(['$rootScope', '$interval', 'Elasticsearch',
 	function ($rootScope, $interval, Elasticsearch) {
 	  $rootScope.pollingInterval = 1000;
+	  $rootScope.currentRequest = null;
 	
 	  $rootScope.runQuery = function runQuery () {
-		Elasticsearch.query($rootScope.selectedDeviceToken)
+		if ($rootScope.currentRequest) return; // don't make another request if one already is pending
+
+		$rootScope.currentRequest = Elasticsearch.query($rootScope.selectedDeviceToken)
 		.then(function (res) {
 		  $rootScope.data = res.data.hits.hits.map(function (hit) {
 			return hit._source;
@@ -17,6 +20,9 @@
 		  console.error('Error with elasticsearch query', err);
 		  alertify.error('Elasticsearch query failed');
 		  $rootScope.autoRefresh = 'false';
+		})
+		.finally(function () {
+		  $rootScope.currentRequest = null;
 		});
 	  };
 
