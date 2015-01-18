@@ -1,5 +1,5 @@
 angular.module('EE')
-.directive('resultsTable', [function () {
+.directive('resultsTable', ['Alertify', function (Alertify) {
   return {
 	restrict: 'E',
 	templateUrl: 'partials/directives/resultsTable.html',
@@ -40,25 +40,13 @@ angular.module('EE')
 	  }
 
 	  function rowClicked (hit) {
-		  console.info(hit);
-		  //alertify.success('Logged row to console.');
-		  alertify.alert('');
-		  var el = $($.find('.alertify-dialog')[0]);
-		  jsonToDom(el, hit);
+		console.info(hit);
+		//alertify.alert('');
+		//var el = $($.find('.alertify-dialog')[0]);
+		//jsonToDom(el, hit);
+		Alertify.showJson(hit);
 	  }
 
-	  function jsonToDom (el, data) {
-		  var root = $('<div class="json-to-dom"></div>');
-		  el.prepend(root);
-		  root.append('<p>{</p>');
-		  for (var key in data) {
-			  if (data.hasOwnProperty(key)) {
-				  root.append('<p class="json-to-dom-list-item">' + key + ': ' + data[key] + '</p>');
-			  }
-		  }
-
-		  root.append('<p>}</p>');
-	  }
 	}
   };
 }]);
