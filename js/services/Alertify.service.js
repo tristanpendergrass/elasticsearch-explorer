@@ -31,4 +31,8 @@ angular.module('EE')
 	}
 
   };
+
+  this.error = function (msg) {
+	alertify.error(msg);
+  };
 }]);

@@ -13,13 +13,12 @@
 	  });
 	}]);
 
-  app.run(['$rootScope', '$interval', '$timeout', '$location', 'Elasticsearch',
-	function ($rootScope, $interval, $timeout, $location, Elasticsearch) {
+  app.run(['$rootScope', '$interval', '$timeout', '$location', 'Elasticsearch', 'Query',
+	function ($rootScope, $interval, $timeout, $location, Elasticsearch, Query) {
 	  $rootScope.pollingInterval = 1000;
 	  $rootScope.currentRequest = null;
 
 	  var queryParams = $location.search();
-	  console.log('query params:', queryParams);
 	  $rootScope.selectedDatabaseUrl = 'http://api.scala.com:9200/';
 	
 	  $rootScope.runQuery = function runQuery () {
