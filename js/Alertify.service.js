@@ -19,7 +19,7 @@ angular.module('EE')
 	  root.append('<p>{</p>');
 	  for (var key in data) {
 		if (data.hasOwnProperty(key)) {
-		  root.append('<p class="json-to-dom-list-item">' + key + ': ' + data[key] + '</p>');
+		  root.append('<p class="json-to-dom-list-item">&nbsp;&nbsp;&nbsp;&nbsp;' + key + ': ' + data[key] + '</p>');
 		}
 	  }
 
@@ -29,5 +29,6 @@ angular.module('EE')
 	function onCoverClick () {
 	  $('#alertify-cover, #alertify, #alertify-logs').remove();
 	}
+
   };
 }]);
