@@ -3,11 +3,23 @@
 (function () {
   var app = angular.module('EE', ['ui.router']);
 
-  app.run(['$rootScope', '$interval', '$timeout', 'Elasticsearch',
-	function ($rootScope, $interval, $timeout, Elasticsearch) {
+  app.config(['$stateProvider', '$urlRouterProvider', 
+  	function ($stateProvider, $urlRouterProvider) {
+	  $urlRouterProvider.otherwise('/');
+	  $stateProvider
+	  .state('home', {
+		url: '/',
+		templateUrl: '../partials/home.html'
+	  });
+	}]);
+
+  app.run(['$rootScope', '$interval', '$timeout', '$location', 'Elasticsearch',
+	function ($rootScope, $interval, $timeout, $location, Elasticsearch) {
 	  $rootScope.pollingInterval = 1000;
 	  $rootScope.currentRequest = null;
 
+	  var queryParams = $location.search();
+	  console.log('query params:', queryParams);
 	  $rootScope.selectedDatabaseUrl = 'http://api.scala.com:9200/';
 	
 	  $rootScope.runQuery = function runQuery () {
