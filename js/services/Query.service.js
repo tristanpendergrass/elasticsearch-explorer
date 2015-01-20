@@ -1,6 +1,6 @@
 angular.module('EE')
-.service('Query', ['$q', 'Elasticsearch', 'Alertify',
-  function Query ($q, Elasticsearch, Alertify) {
+.service('Query', ['$q', '$interval', 'Elasticsearch', 'Alertify',
+  function Query ($q, $interval, Elasticsearch, Alertify) {
 	var that = this;
 	var currentRequest = null;
 
@@ -9,6 +9,7 @@ angular.module('EE')
 	  deviceToken: '',
 	  applicationUuid: ''
 	};
+	this.data = null;
 
 	this.runOnce = function runOnce () {
 	  if (currentRequest) {
@@ -34,5 +35,19 @@ angular.module('EE')
 		currentRequest = deferred.promise;
 		return deferred.promise;
 	  }
-	}
+	};
+
+	this.runContinuously = function () {
+	  var waitTime = that.interval || 1000;
+
+	  $interval(runAndRecord, waitTime);
+
+	  function runAndRecord () {
+		that.runOnce().then(function (data) {
+		  that.data = data;
+		}, function (err) {
+		  // cancel the interval
+		});
+	  }
+	};
   }]);
