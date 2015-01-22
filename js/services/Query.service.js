@@ -3,13 +3,19 @@ angular.module('EE')
   function Query ($q, $interval, Elasticsearch, Alertify) {
 	var that = this;
 	var currentRequest = null;
+	var currentInterval;
 
-	this.databaseUrl = 'http://api.scala.com:9200';
-	this.filters = {
+	this.settings = {
+	  databaseUrl: 'http://api.scala.com:9200',
 	  deviceToken: '',
 	  applicationUuid: ''
 	};
 	this.data = null;
+	this.cancelInterval = function () {
+	  if (currentInterval) {
+		$interval.cancel(currentInterval);
+	  }
+	};
 
 	this.runOnce = function runOnce () {
 	  if (currentRequest) {
@@ -17,15 +23,15 @@ angular.module('EE')
 	  } else {
 		var deferred = $q.defer();
 
-		Elasticsearch.baseUrl = that.databaseUrl;
-		Elasticsearch.query(that.filters.deviceToken, that.filters.applicationUuid)
+		Elasticsearch.baseUrl = that.settings.databaseUrl;
+		Elasticsearch.query(that.settings.deviceToken, that.settings.applicationUuid)
 		.then(function (res) {
-		  deferred.resolve(res.data.hits.hits.map(function (hit) {
+		  var data = res.data.hits.hits.map(function (hit) {
 			return hit._source;
-		  }));
+		  });
+		  that.data = data;
+		  deferred.resolve(data);
 		}, function (err) {
-		  console.error('Error with elasticsearch query', err);
-		  Alertify.error('Elasticsearch query failed');
 		  deferred.reject(err);
 		})
 		.finally(function () {
@@ -38,16 +44,28 @@ angular.module('EE')
 	};
 
 	this.runContinuously = function () {
+	  if (currentInterval) {
+		console.error('Run continously was called when it was already running');
+		return;
+	  }
 	  var waitTime = that.interval || 1000;
 
-	  $interval(runAndRecord, waitTime);
+	  that.runOnce().then(function (data) {
+		currentInterval = $interval(runAndRecord, waitTime);
+	  }, queryError);
 
 	  function runAndRecord () {
 		that.runOnce().then(function (data) {
-		  that.data = data;
 		}, function (err) {
-		  // cancel the interval
+		  $interval.cancel(currentInterval);
+		  queryError(err);
+		  Alertify.error('Halting autorefresh');
 		});
 	  }
 	};
+
+	function queryError (err) {
+	  console.error('Error with elasticsearch query', err);
+	  Alertify.error('Elasticsearch query failed');
+	}
   }]);

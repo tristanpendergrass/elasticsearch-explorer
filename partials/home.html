@@ -1,34 +1,33 @@
 <h1>Scala Elasticsearch Explorer</h1>
 <h4 class="filter-input-group">
   <strong>database</strong>:
-  <input id="database-filter" type="text" class="device-token-input" ng-model="selectedDatabaseUrl" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }">
+  <input id="database-filter" type="text" class="device-token-input" ng-model="vm.settings.databaseUrl" ng-model-options="{ updateOn: 'blur' }">
 </h4>
 <div class="clear"></div>
 <h4 class="filter-input-group">
   <strong>device token</strong>:
-  <input type="text" class="device-token-input" ng-model="selectedDeviceToken" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }">
+  <input type="text" class="device-token-input" ng-model="vm.settings.deviceToken" ng-model-options="{ updateOn: 'blur' }">
 </h4>
 <h4 class="filter-input-group">
   <strong>application uuid</strong>:
-  <input type="text" class="device-token-input" ng-model="selectedApplicationUuid" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }">
+  <input type="text" class="device-token-input" ng-model="vm.settings.applicationUuid" ng-model-options="{ updateOn: 'blur' }">
 </h4>
 <div class="clear"></div>
 <div class="auto-manual-options">
 	<label>
-	  <input type="radio" ng-model="autoRefresh" value="true">
+	  <input type="radio" ng-model="vm.autoRefresh" value="true">
 	  Auto Refresh
 	</label>
 	<label>
-	  <input type="radio" ng-model="autoRefresh" value="false">
+	  <input type="radio" ng-model="vm.autoRefresh" value="false">
 	  Manual Refresh
 	</label>
 </div>
-<div class="polling-for-data" ng-if="autoRefresh === 'true'">
+<div class="polling-for-data" ng-if="vm.autoRefresh === 'true'">
 	<img src="assets/images/loading_icon.gif">
-	Polling every <strong>{{pollingInterval}}</strong>ms
+	Polling every <strong>{{vm.pollingInterval}}</strong>ms
 </div>
-<button type="button" ng-click="manualRefresh()" ng-if="autoRefresh === 'false'">Refresh</button>
+<button type="button" ng-click="vm.manualRefresh()" ng-if="vm.autoRefresh === 'false'">Refresh</button>
 
-<results-table data="data" ng-if="data"></results-table>
-<div ng-if="!data">No data available</div>
-</div>
+<results-table data="vm.getData()" ng-if="vm.getData()"></results-table>
+<div ng-if="!vm.getData()">No data available</div>
