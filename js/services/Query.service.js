@@ -3,7 +3,7 @@ angular.module('EE')
   function Query ($q, $interval, Elasticsearch, Alertify) {
 	var that = this;
 	var currentRequest = null;
-	var currentInterval;
+	var currentInterval = null;
 
 	this.settings = {
 	  databaseUrl: 'http://api.scala.com:9200',
@@ -14,6 +14,7 @@ angular.module('EE')
 	this.cancelInterval = function () {
 	  if (currentInterval) {
 		$interval.cancel(currentInterval);
+		currentInterval = null;
 	  }
 	};
 
@@ -55,9 +56,9 @@ angular.module('EE')
 	  }, queryError);
 
 	  function runAndRecord () {
-		that.runOnce().then(function (data) {
-		}, function (err) {
+		that.runOnce().then(null, function (err) {
 		  $interval.cancel(currentInterval);
+		  currentInterval = null;
 		  queryError(err);
 		  Alertify.error('Halting autorefresh');
 		});

@@ -13,6 +13,8 @@ angular.module('EE')
 
 	$scope.$watch('vm.autoRefresh', function (newVal) {
 	  if (newVal === 'true') {
+		Query.interval = vm.pollingInterval;
+		Query.runContinuously();
 	  } else {
 		Query.cancelInterval();
 	  }
@@ -24,5 +26,4 @@ angular.module('EE')
 	}
 
 	Query.interval = vm.pollingInterval;
-	Query.runContinuously();
   }]);
