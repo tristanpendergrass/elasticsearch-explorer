@@ -1,16 +1,16 @@
 <h1>Scala Elasticsearch Explorer</h1>
 <h4 class="filter-input-group">
   <strong>database</strong>:
-  <input id="database-filter" type="text" class="device-token-input" ng-model="vm.settings.databaseUrl" ng-model-options="{ updateOn: 'blur' }">
+  <input id="database-filter" type="text" class="device-token-input" ng-model="vm.settings.databaseUrl" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }">
 </h4>
 <div class="clear"></div>
 <h4 class="filter-input-group">
   <strong>device token</strong>:
-  <input type="text" class="device-token-input" ng-model="vm.settings.deviceToken" ng-model-options="{ updateOn: 'blur' }">
+  <input type="text" class="device-token-input" ng-model="vm.settings.deviceToken" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }">
 </h4>
 <h4 class="filter-input-group">
   <strong>application uuid</strong>:
-  <input type="text" class="device-token-input" ng-model="vm.settings.applicationUuid" ng-model-options="{ updateOn: 'blur' }">
+  <input type="text" class="device-token-input" ng-model="vm.settings.applicationUuid" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }">
 </h4>
 <div class="clear"></div>
 <div class="auto-manual-options">

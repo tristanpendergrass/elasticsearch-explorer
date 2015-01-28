@@ -1,7 +1,12 @@
 angular.module('EE')
-.controller('HomeCtrl', ['$scope', 'Query',
-  function HomeCtrl ($scope, Query) {
+.controller('HomeCtrl', ['$scope', '$location', 'Query',
+  function HomeCtrl ($scope, $location, Query) {
 	var vm = this;
+
+	var queryParams = $location.search();
+	Query.settings.databaseUrl = queryParams.databaseUrl || Query.settings.databaseUrl;
+	Query.settings.applicationUuid = queryParams.applicationUuid || Query.settings.applicationUuid;
+	Query.settings.deviceToken = queryParams.deviceToken || Query.settings.deviceToken;
 
 	vm.settings = Query.settings;
 	vm.autoRefresh = 'true';
@@ -26,4 +31,13 @@ angular.module('EE')
 	}
 
 	Query.interval = vm.pollingInterval;
+
+	$scope.$watch('vm.settings', function (newSettings) {
+	  // update the query string to have the correct settings
+	  for (var prop in newSettings) {
+		if (newSettings.hasOwnProperty(prop)) {
+		  $location.search(prop, newSettings[prop]);
+		}
+	  }
+	}, true);
   }]);
