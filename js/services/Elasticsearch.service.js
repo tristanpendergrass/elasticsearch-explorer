@@ -11,6 +11,7 @@ angular.module('EE')
 	  applicationUuid = applicationUuid || '';
 	  deviceToken = deviceToken || '';
 	  var data = {"query":{"bool":{"must":[{"wildcard":{"_originatorIdentifier":deviceToken+'*'}},{"wildcard":{"applicationUuid":applicationUuid+'*'}},{"term":{"_action.raw":"deviceRegionActivity"}}],"must_not":[],"should":[]}},"from":"0","size":"50","sort":[{"@timestamp":{"reverse":"true","ignore_unmapped":"true"}}],"facets":{},"version":"true"};
+	  console.log('data', JSON.stringify(data));
 	  return $http.post(url, data);
 
 	  function addTrailingSlash (str) {

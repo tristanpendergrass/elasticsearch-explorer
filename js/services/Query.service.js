@@ -1,12 +1,12 @@
 angular.module('EE')
-.service('Query', ['$q', '$interval', 'Elasticsearch', 'Alertify',
-  function Query ($q, $interval, Elasticsearch, Alertify) {
+.service('Query', ['$q', '$interval', 'Elasticsearch', 'Alertify', 'config',
+  function Query ($q, $interval, Elasticsearch, Alertify, config) {
 	var that = this;
 	var currentRequest = null;
 	var currentInterval = null;
 
 	this.settings = {
-	  databaseUrl: 'http://api.scala.com:9200',
+	  databaseUrl: config.databaseUrlDefaults.prod,
 	  deviceToken: '',
 	  applicationUuid: ''
 	};

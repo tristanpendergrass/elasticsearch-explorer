@@ -3,10 +3,7 @@ angular.module('EE')
   function HomeCtrl ($scope, $location, Query) {
 	var vm = this;
 
-	var queryParams = $location.search();
-	Query.settings.databaseUrl = queryParams.databaseUrl || Query.settings.databaseUrl;
-	Query.settings.applicationUuid = queryParams.applicationUuid || Query.settings.applicationUuid;
-	Query.settings.deviceToken = queryParams.deviceToken || Query.settings.deviceToken;
+	//setParamsFromQueryString();
 
 	vm.settings = Query.settings;
 	vm.autoRefresh = 'true';
@@ -25,7 +22,7 @@ angular.module('EE')
 	  }
 	});
 
-	
+
 	function manualRefresh () {
 	  Query.runOnce();
 	}
@@ -40,4 +37,12 @@ angular.module('EE')
 		}
 	  }
 	}, true);
+
+	function setParamsFromQueryString () {
+	  var queryParams = $location.search();
+
+	  Query.settings.databaseUrl = queryParams.databaseUrl || Query.settings.databaseUrl;
+	  Query.settings.applicationUuid = queryParams.applicationUuid || Query.settings.applicationUuid;
+	  Query.settings.deviceToken = queryParams.deviceToken || Query.settings.deviceToken;
+	}
   }]);
