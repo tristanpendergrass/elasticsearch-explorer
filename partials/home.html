@@ -2,6 +2,12 @@
 <h4 class="filter-input-group">
   <strong>database</strong>:
   <input id="database-filter" type="text" class="device-token-input" ng-model="vm.settings.databaseUrl" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }">
+  <select class="device-token-input" database-url-preset settings="vm.settings">
+	  <option value="dev">Dev</option>
+	  <option value="stage">Stage</option>
+	  <option value="prod">Prod</option>
+	  <option value="custom">Custom</option>
+  </select>
 </h4>
 <div class="clear"></div>
 <h4 class="filter-input-group">
